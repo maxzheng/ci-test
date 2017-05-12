@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker 'python:3.5.1' }
+    agent { docker 'maxzheng/tox' }
     stages {
         stage('build') {
             steps {
