@@ -14,16 +14,24 @@ node('docker-test') {
         print(currentBuild.changeSets)
         print(currentBuild.changeSets.getClass())
 
+        def hasBumpCommit = False
+        def hasMergeCommit = False
+
         for (changeSet in currentBuild.changeSets) {
             for (change in changeSet.items) {
                 print(change)
                 print(change.msg)
-                print(change.msg.startsWith('Bump Confluent') || change.msg.startsWith('Bump Kafka'))
-                print(change.msg.startsWith('Merge branch'))
-                def isBumpMerge = change.msg.startsWith('Merge branch') && (change.msg.startsWith('Bump Confluent') || change.msg.startsWith('Bump Kafka'))
-                print('Is Bump Merge? ')
-                println(isBumpMerge)
+                hasBumpCommit = hasBumpCommit || change.msg.startsWith('Bump Confluent') || change.msg.startsWith('Bump Kafka')
+                hasMergeCommit = hasMergeCommit || change.msg.startsWith('Merge branch')
             }
+        }
+
+        print(hasBumpCommit)
+        print(hasMergeCommit)
+
+        if (hasBumpCommit && hasMergeCommit) {
+            currentBuild.result = 'ABORTED'
+            error('Cancelling build for bump commit merges as they are generally noop but causes build queue spike')
         }
     }
 }
