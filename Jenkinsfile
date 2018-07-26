@@ -1,6 +1,5 @@
 node('docker-test') {
     stage('Checkout') {
-        // Include tags: https://issues.jenkins-ci.org/browse/JENKINS-45164
         checkout([
             $class: 'GitSCM',
             branches: scm.branches,
