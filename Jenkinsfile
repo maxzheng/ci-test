@@ -16,7 +16,12 @@ node('docker-test') {
 
         for (change in currentBuild.changeSets) {
             print(change)
-            print(change.getClass())
+            print(change.msg)
+            print(change.msg.startsWith('Bump Confluent') || change.msg.startsWith('Bump Kafka'))
+            print(change.msg.startsWith('Merge branch'))
+            def isBumpMerge = change.msg.startsWith('Merge branch') && (change.msg.startsWith('Bump Confluent') || change.msg.startsWith('Bump Kafka'))
+            print('Is Bump Merge? ')
+            println(isBumpMerge)
         }
     }
 }
