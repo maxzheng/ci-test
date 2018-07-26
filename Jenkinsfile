@@ -14,8 +14,8 @@ node('docker-test') {
         print(currentBuild.changeSets)
         print(currentBuild.changeSets.getClass())
 
-        def hasBumpCommit = False
-        def hasMergeCommit = False
+        def hasBumpCommit = false
+        def hasMergeCommit = false
 
         for (changeSet in currentBuild.changeSets) {
             for (change in changeSet.items) {
