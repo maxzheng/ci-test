@@ -1,5 +1,16 @@
+stage('Checkout') {
+    // Include tags: https://issues.jenkins-ci.org/browse/JENKINS-45164
+    checkout([
+        $class: 'GitSCM',
+        branches: scm.branches,
+        doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
+        extensions: [[$class: 'CloneOption', noTags: false, shallow: false, depth: 0, reference: '']],
+        userRemoteConfigs: scm.userRemoteConfigs,
+    ])
+}
+
+
 stage('test') {
-    print('weird no changes')
     print(currentBuild.changeSets)
     print(currentBuild.changeSets.getClass())
 
