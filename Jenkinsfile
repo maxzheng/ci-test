@@ -1,4 +1,5 @@
 stage('test') {
+    print('weird no changes')
     print(currentBuild.changeSets)
     print(currentBuild.changeSets.getClass())
 
