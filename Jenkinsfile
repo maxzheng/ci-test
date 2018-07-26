@@ -1,10 +1,2 @@
-pipeline {
-    agent { docker 'maxzheng/tox' }
-    stages {
-        stage('build') {
-            steps {
-                sh 'tox'
-            }
-        }
-    }
-}
+print(currentBuild.changeSets)
+print(currentBuild.changeSets.getClass())
