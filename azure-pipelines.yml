@@ -14,7 +14,7 @@ jobs:
   strategy:
     matrix:
       Python37:
-        python.version: '3.7'
+        python.version: '3.6'
     maxParallel: 4
 
   steps:
@@ -30,6 +30,7 @@ jobs:
       pip install pytest
       pytest --version
       pytest --doctest-modules --junitxml=junit/test-results.xml
+      blah
     displayName: 'pytest'
 
   - task: PublishTestResults@2
