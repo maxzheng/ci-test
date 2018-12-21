@@ -31,6 +31,7 @@ jobs:
       pip install pytest
       pytest --version
       pytest --doctest-modules --junitxml=junit/test-results.xml
+      git branch -a
       blah
     displayName: 'pytest'
 
