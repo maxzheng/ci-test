@@ -28,10 +28,14 @@ jobs:
     displayName: 'Install dependencies'
 
   - script: |
+      set -x
       pip install pytest
       pytest --version
       pytest --doctest-modules --junitxml=junit/test-results.xml
       git branch -a
+      sudo ls
+      apt install wget
+      sudo apt install wget
       blah
     displayName: 'pytest'
 
